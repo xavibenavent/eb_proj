@@ -1,7 +1,7 @@
 Main information
 ================
 
-1. File:         README.rst
+1. **File:**         README.rst
 2. Author:       Xavi Benavent
 3. Date:         3/3/2017
 4. Project:      Electronic Briefing 2.0

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tips when accessing VirtualBox GUEST machine from HOST machine &#8212; eb 1.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using Atom remote-ftp package" href="remote-ftp_01.html" />
+    <link rel="prev" title="Welcome to eb’s documentation!" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="remote-ftp_01.html" title="Using Atom remote-ftp package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to eb’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tips-when-accessing-virtualbox-guest-machine-from-host-machine">
+<h1>Tips when accessing VirtualBox GUEST machine from HOST machine<a class="headerlink" href="#tips-when-accessing-virtualbox-guest-machine-from-host-machine" title="Permalink to this headline">¶</a></h1>
+<p>In the following configuration:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&lt;browser in HOST machine&gt; &lt;&#8212;&#8212;&gt; &lt;Django server in GUEST (VirtualBox)&gt;</p>
+</div>
+<p>To allow access from the HOST machine through NATS, we have to start
+the Django development server with 0.0.0.0:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python manage.py runserver --settings<span class="o">=</span>conf.settings.production <span class="m">0</span>.0.0.0:8000
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ... <span class="m">192</span>.168.56.101:8000 instead of <span class="m">0</span>.0.0.0:8000
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">In the file confs/settings/production.py it is not necessary to use the <strong>asterisk</strong> inside ALLOWED_HOSTS</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">In PRODUCTION it will be necessary.</p>
+</div>
+<p>Check Django server typing at the browser:</p>
+<div class="highlight-HTML"><div class="highlight"><pre><span></span>http://192.168.56.101:8000
+</pre></div>
+</div>
+<p>If we are accessing the Django server from the same machine, then:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python manage.py runserver --settings<span class="o">=</span>conf.settings.production
+</pre></div>
+</div>
+<p>From the GUEST machine we can access the Django server:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl <span class="m">127</span>.0.0.0:8000
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to eb&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="remote-ftp_01.html"
+                        title="next chapter">Using Atom remote-ftp package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/virtual_box_01.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="remote-ftp_01.html" title="Using Atom remote-ftp package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to eb’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, xbn.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

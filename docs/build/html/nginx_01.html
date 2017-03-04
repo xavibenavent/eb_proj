@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using NGINX server &#8212; eb 1.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using Sphinx" href="sphinx_01.html" />
+    <link rel="prev" title="Welcome to eb’s documentation!" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sphinx_01.html" title="Using Sphinx"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to eb’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="using-nginx-server">
+<h1>Using NGINX server<a class="headerlink" href="#using-nginx-server" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install nginx
+</pre></div>
+</div>
+<p>Check installed files:</p>
+<p>Binary file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx</span>
+</pre></div>
+</div>
+<p>Log files:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">access</span><span class="o">.</span><span class="n">log</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">error</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+<p>Configuration file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">nginx</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this file there are settings as <strong>worker_connections</strong></p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The server also reads the settings contained in the files stored at
+<strong>/etc/nginx/sites-enabled/</strong> directory.</p>
+<p>We need to create a configuration file with:</p>
+<ol class="arabic simple">
+<li>Listening port</li>
+<li>Socket to forward to uWSGI server</li>
+<li>Absolut (hard-coded) path for static files</li>
+<li>Absolut (hard-coded) path for media files</li>
+</ol>
+<p>Contents of the configuration file <strong>nginx.data</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">xbn</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">eb_proj</span><span class="o">/</span><span class="n">servers_conf</span><span class="o">/</span><span class="n">nginx</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+<p>Contents of the <strong>nginx.data</strong> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># nginx.data</span>
+
+<span class="n">upstream</span> <span class="n">django</span> <span class="p">{</span>
+    <span class="c1"># Socket to connect to uWSGI server</span>
+    <span class="n">server</span> <span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">home</span><span class="o">/</span><span class="n">xbn</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">eb_proj</span><span class="o">/</span><span class="n">eb</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">server</span> <span class="p">{</span>
+    <span class="n">listen</span> <span class="mi">8008</span><span class="p">;</span>
+    <span class="n">server_name</span> <span class="n">localhost</span><span class="p">;</span>
+    <span class="n">charset</span> <span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="p">;</span>
+    <span class="n">client_max_body_size</span> <span class="mi">75</span><span class="n">M</span><span class="p">;</span>
+
+    <span class="n">location</span> <span class="o">/</span><span class="n">media</span> <span class="p">{</span>
+        <span class="n">alias</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">xbn</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">eb_proj</span><span class="o">/</span><span class="n">eb</span><span class="o">/</span><span class="n">media</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">location</span> <span class="o">/</span><span class="n">static</span> <span class="p">{</span>
+        <span class="n">alias</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">xbn</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">eb_proj</span><span class="o">/</span><span class="n">eb</span><span class="o">/</span><span class="n">static</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="n">uwsgi_pass</span> <span class="n">django</span><span class="p">;</span>
+        <span class="c1"># The following file is suposed to be in the same directory</span>
+        <span class="n">include</span> <span class="n">uwsgi_params</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>But instead of storing the file in this directory,
+we create a soft link to the file in our production directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="n">nginx</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+<p>We create the soft link:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo ln -s /home/xbn/eb20/nexus/nexus_nginx.conf /etc/nginx/sites-enabled
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="starting-the-server">
+<h1>Starting the server<a class="headerlink" href="#starting-the-server" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo service nginx start <span class="o">(</span>or restart<span class="o">)</span>
+</pre></div>
+</div>
+<p>Check that the server is running and listening to the apropriate port:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ps -A <span class="p">|</span> grep nginx
+$ sudo lsof -i
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using NGINX server</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#starting-the-server">Starting the server</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to eb&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sphinx_01.html"
+                        title="next chapter">Using Sphinx</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/nginx_01.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sphinx_01.html" title="Using Sphinx"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to eb’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, xbn.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+# nginx.data
+
+upstream django {
+    # Socket to connect to uWSGI server
+    server unix:///home/xbn/projects/eb_proj/eb.sock;
+}
+
+server {
+    listen 8008;
+    server_name localhost;
+    charset utf-8;
+    client_max_body_size 75M;
+
+    location /media {
+        alias /home/xbn/projects/eb_proj/eb/media;
+    }
+
+    location /static {
+        alias /home/xbn/projects/eb_proj/eb/static;
+    }
+
+    location / {
+        uwsgi_pass django;
+        # The following file is suposed to be in the same directory
+        include uwsgi_params;
+    }
+}

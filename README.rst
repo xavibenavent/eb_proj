@@ -11,10 +11,9 @@ Notes:
 ------
 
  1. Main directory organization:
-     - virtual environments: */home/xbn/.envs/dj1.9/*
-     - projects: */home/xbn/projects/eb_proj/*
+     - Virtual environments: */home/xbn/.envs/dj1.9/*
+     - Project: */home/xbn/projects/eb_proj/*
 
  2. Sphinx:
-    - Installed as global (not included in any virtualenv)
-      This means that to generate the documentation we have to
-      deactivate the current virtual environment.
+     - Installed as global (not included in any virtualenv)
+     - This means that to generate the documentation we have to deactivate the current virtual environment.

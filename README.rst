@@ -1,11 +1,14 @@
 Main information
 ================
 
-1. **File:**         README.rst
-2. **Author:**       Xavi Benavent
-3. **Date:**         3/3/2017
-4. **Project:**      Electronic Briefing 2.0
-5. **Description:**  Web version of ebum (eb 1.0)
+================== =============================
+================== =============================
+**File:**          README.rst
+**Author:**        Xavi Benavent
+**Date:**          3/3/2017
+**Project:**       Electronic Briefing 2.0
+**Description:**   Web version of ebum (eb 1.0)
+================== =============================
 
 Notes:
 ------

@@ -12,10 +12,10 @@ Welcome to eb's documentation!
 
    virtual_box_01
    remote-ftp_01
+   linux_packages
    nginx_01
    git_01
    sphinx_01
-
 
 Indices and tables
 ==================

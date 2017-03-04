@@ -18,4 +18,4 @@ Notes:
 
  2. Sphinx:
      - Installed as global (not included in any virtualenv)
-     - This means that to generate the documentation we have to deactivate the current virtual environment.
+     - This means that to build the documentation we have to deactivate the current virtual environment.

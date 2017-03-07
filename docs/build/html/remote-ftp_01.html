@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Using NGINX server" href="nginx_01.html" />
+    <link rel="next" title="Linux packages management" href="linux_packages.html" />
     <link rel="prev" title="Tips when accessing VirtualBox GUEST machine from HOST machine" href="virtual_box_01.html" /> 
   </head>
   <body role="document">
@@ -37,7 +37,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="nginx_01.html" title="Using NGINX server"
+          <a href="linux_packages.html" title="Linux packages management"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="virtual_box_01.html" title="Tips when accessing VirtualBox GUEST machine from HOST machine"
@@ -64,12 +64,12 @@
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo vim /etc/vsftpd.conf
 </pre></div>
 </div>
-<p>Modify the following settings:</p>
+<p>Modify the following settings to allow a <strong>User Authenticated FTP Configuration</strong></p>
 <ol class="arabic simple">
-<li>anonymous_enable=YES</li>
+<li>anonymous_enable=NO</li>
 <li>write_enable=YES</li>
-<li>anon_upload_enable=YES</li>
-<li>anon_mkdir_write_enable=YES</li>
+<li>anon_upload_enable=NO</li>
+<li>anon_mkdir_write_enable=NO</li>
 </ol>
 <p>Restart the vsftpd server and check it:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo service vsftpd restart
@@ -82,13 +82,26 @@ $ sudo service --status-all
 <p>When starting:</p>
 <ol class="arabic simple">
 <li>Install package <strong>remote-ftp</strong> from within Atom</li>
-<li>Open and set <strong>.ftpconfig</strong> file</li>
-<li>From packages&gt;remote-ftp&gt;Toggle</li>
-<li>From packages&gt;remote-ftp&gt;Connect</li>
+<li>Open and set <strong>.ftpconfig</strong> file to allow a <strong>User Authenticated FTP Configuration</strong>
+to connect to <strong>/xbn/home/projects/</strong></li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;ftp&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.56.101&quot;</span><span class="p">,</span> <span class="o">//</span> <span class="n">string</span> <span class="o">-</span> <span class="n">The</span> <span class="n">hostname</span> <span class="ow">or</span> <span class="n">IP</span> <span class="n">address</span> <span class="n">of</span> <span class="n">the</span> <span class="n">FTP</span> <span class="n">server</span><span class="o">.</span> <span class="n">Default</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span>
+    <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span> <span class="o">//</span> <span class="n">integer</span> <span class="o">-</span> <span class="n">The</span> <span class="n">port</span> <span class="n">of</span> <span class="n">the</span> <span class="n">FTP</span> <span class="n">server</span><span class="o">.</span> <span class="n">Default</span><span class="p">:</span> <span class="mi">21</span>
+    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;xbn&quot;</span><span class="p">,</span> <span class="o">//</span> <span class="n">string</span> <span class="o">-</span> <span class="n">Username</span> <span class="k">for</span> <span class="n">authentication</span><span class="o">.</span> <span class="n">Default</span><span class="p">:</span> <span class="s1">&#39;anonymous&#39;</span>
+    <span class="s2">&quot;pass&quot;</span><span class="p">:</span> <span class="s2">&quot;xbn&quot;</span><span class="p">,</span> <span class="o">//</span> <span class="n">string</span> <span class="o">-</span> <span class="n">Password</span> <span class="k">for</span> <span class="n">authentication</span><span class="o">.</span> <span class="n">Default</span><span class="p">:</span> <span class="s1">&#39;anonymous@&#39;</span>
+    <span class="s2">&quot;remote&quot;</span><span class="p">:</span> <span class="s2">&quot;/home/xbn/projects/&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>From packages&gt;remote-ftp <strong>Toggle</strong></li>
+<li>From packages&gt;remote-ftp <strong>Connect</strong></li>
 </ol>
 <p>When finishing:</p>
 <ol class="arabic simple">
-<li>From packages&gt;remote-ftp&gt;Disconnect</li>
+<li>From packages&gt;remote-ftp&gt; <strong>Disconnect</strong></li>
 </ol>
 </div>
 </div>
@@ -112,8 +125,8 @@ $ sudo service --status-all
   <p class="topless"><a href="virtual_box_01.html"
                         title="previous chapter">Tips when accessing VirtualBox GUEST machine from HOST machine</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="nginx_01.html"
-                        title="next chapter">Using NGINX server</a></p>
+  <p class="topless"><a href="linux_packages.html"
+                        title="next chapter">Linux packages management</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -142,7 +155,7 @@ $ sudo service --status-all
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="nginx_01.html" title="Using NGINX server"
+          <a href="linux_packages.html" title="Linux packages management"
              >next</a> |</li>
         <li class="right" >
           <a href="virtual_box_01.html" title="Tips when accessing VirtualBox GUEST machine from HOST machine"
@@ -152,7 +165,7 @@ $ sudo service --status-all
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, xbn.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
   </body>
 </html>

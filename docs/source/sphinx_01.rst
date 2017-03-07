@@ -10,6 +10,10 @@ Download & Install Sphinx:
 
    $ sudo pip install Sphinx
 
+.. warning:: When pulling from a repository it is better to install sphinx as a linux package.
+             (We will recognize this situation when the **$ make html** command won't work).
+             Installation: **$ sudo apt-get install python-sphinx**
+
 Create the directory to hold the project
 
 .. code-block:: console
@@ -58,5 +62,28 @@ Test with a web browser:
 Creating documentation
 ----------------------
 
+Edit the **index.rst** file and add the **ch_XX.rst** files needed
 
 
+Main directives
+---------------
+
+**Paragraph:**
+
+This is a paragraph
+
+**Code:**
+
+.. code-block:: bash
+
+   $ command parameter
+
+**List:**
+
+1. First item
+2. Second item
+
+**File content:**
+
+.. include:: foofile.data
+   :literal:

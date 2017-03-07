@@ -18,12 +18,12 @@ Edit **/etc/vsftpd.conf** file:
 
    $ sudo vim /etc/vsftpd.conf
 
-Modify the following settings:
+Modify the following settings to allow a **User Authenticated FTP Configuration**
 
-1. anonymous_enable=YES
+1. anonymous_enable=NO
 2. write_enable=YES
-3. anon_upload_enable=YES
-4. anon_mkdir_write_enable=YES
+3. anon_upload_enable=NO
+4. anon_mkdir_write_enable=NO
 
 Restart the vsftpd server and check it:
 
@@ -40,11 +40,16 @@ Basic Atom setup
 When starting:
 
 1. Install package **remote-ftp** from within Atom
-2. Open and set **.ftpconfig** file
-3. From packages>remote-ftp>Toggle
-4. From packages>remote-ftp>Connect
+2. Open and set **.ftpconfig** file to allow a **User Authenticated FTP Configuration**
+   to connect to **/xbn/home/projects/**
+
+.. literalinclude:: ftpconfig.data
+
+
+3. From packages>remote-ftp **Toggle**
+4. From packages>remote-ftp **Connect**
 
 
 When finishing:
 
-1. From packages>remote-ftp>Disconnect
+1. From packages>remote-ftp> **Disconnect**

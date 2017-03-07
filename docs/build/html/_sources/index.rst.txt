@@ -7,7 +7,7 @@ Welcome to eb's documentation!
 ==============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    virtual_box_01

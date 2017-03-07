@@ -55,6 +55,12 @@
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo pip install Sphinx
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When pulling from a repository it is better to install sphinx as a linux package.
+(We will recognize this situation when the <strong>$ make html</strong> command won&#8217;t work).
+Installation: <strong>$ sudo apt-get install python-sphinx</strong></p>
+</div>
 <p>Create the directory to hold the project</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir sf01
 <span class="gp">$</span> <span class="nb">cd</span> sf01
@@ -80,7 +86,7 @@ Welcome to eb&#39;s documentation!
 ==============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    virtual_box_01
@@ -265,6 +271,30 @@ Indices and tables
 </div>
 <div class="section" id="creating-documentation">
 <h2>Creating documentation<a class="headerlink" href="#creating-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Edit the <strong>index.rst</strong> file and add the <strong>ch_XX.rst</strong> files needed</p>
+</div>
+<div class="section" id="main-directives">
+<h2>Main directives<a class="headerlink" href="#main-directives" title="Permalink to this headline">¶</a></h2>
+<p><strong>Paragraph:</strong></p>
+<p>This is a paragraph</p>
+<p><strong>Code:</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">command</span> parameter
+</pre></div>
+</div>
+<p><strong>List:</strong></p>
+<ol class="arabic simple">
+<li>First item</li>
+<li>Second item</li>
+</ol>
+<p><strong>File content:</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># foofile.data</span>
+
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">foo</span> <span class="n">file</span><span class="o">.</span>
+
+<span class="n">data</span> <span class="mi">1</span>
+<span class="n">data</span> <span class="mi">2</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -279,6 +309,7 @@ Indices and tables
 <li><a class="reference internal" href="#">Using Sphinx</a><ul>
 <li><a class="reference internal" href="#first-steps">First steps</a></li>
 <li><a class="reference internal" href="#creating-documentation">Creating documentation</a></li>
+<li><a class="reference internal" href="#main-directives">Main directives</a></li>
 </ul>
 </li>
 </ul>
@@ -321,7 +352,7 @@ Indices and tables
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, xbn.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
   </body>
 </html>

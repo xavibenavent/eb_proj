@@ -39,15 +39,17 @@ Basic Atom setup
 
 When starting:
 
-1. Install package **remote-ftp** from within Atom
-2. Open and set **.ftpconfig** file to allow a **User Authenticated FTP Configuration**
+1. Download Atom (.deb or .rpm)
+2. Install package **remote-ftp** from within Atom
+3. Open and set **.ftpconfig** file to allow a **User Authenticated FTP Configuration**
    to connect to **/xbn/home/projects/**
 
 .. literalinclude:: ftpconfig.data
 
 
-3. From packages>remote-ftp **Toggle**
-4. From packages>remote-ftp **Connect**
+4. From packages>remote-ftp **Toggle**
+5. From packages>remote-ftp **Connect**
+
 
 
 When finishing:

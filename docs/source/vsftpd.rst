@@ -44,7 +44,7 @@ When starting:
 3. Open and set **.ftpconfig** file to allow a **User Authenticated FTP Configuration**
    to connect to **/xbn/home/projects/**
 
-.. literalinclude:: ftpconfig.data
+.. literalinclude:: data/ftpconfig.data
 
 
 4. From packages>remote-ftp **Toggle**

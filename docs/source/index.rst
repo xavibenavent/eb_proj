@@ -11,7 +11,7 @@ Welcome to eb's documentation!
    :caption: Contents:
 
    virtual_box_01
-   remote-ftp_01
+   vsftpd
    linux_packages
    nginx_01
    git_01

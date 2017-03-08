@@ -85,5 +85,5 @@ This is a paragraph
 
 **File content:**
 
-.. include:: foofile.data
+.. include:: data/foofile.data
    :literal:

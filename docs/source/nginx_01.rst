@@ -48,7 +48,7 @@ Contents of the configuration file **nginx.data**:
 
 Contents of the **nginx.data** file:
 
-.. literalinclude:: nginx.data
+.. literalinclude:: data/nginx_01.data
 
 
 But instead of storing the file in this directory,

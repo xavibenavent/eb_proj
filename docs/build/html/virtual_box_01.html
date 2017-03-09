@@ -17,8 +17,7 @@
         VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -26,7 +25,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Using Atom remote-ftp package" href="remote-ftp_01.html" />
+    <link rel="top" title="eb 1.1.0 documentation" href="index.html" />
+    <link rel="next" title="Using Atom remote-ftp package" href="vsftpd.html" />
     <link rel="prev" title="Welcome to eb’s documentation!" href="index.html" /> 
   </head>
   <body role="document">
@@ -37,7 +37,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="remote-ftp_01.html" title="Using Atom remote-ftp package"
+          <a href="vsftpd.html" title="Using Atom remote-ftp package"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to eb’s documentation!"
@@ -60,11 +60,11 @@
 </div>
 <p>To allow access from the HOST machine through NATS, we have to start
 the Django development server with 0.0.0.0:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python manage.py runserver --settings<span class="o">=</span>conf.settings.production <span class="m">0</span>.0.0.0:8000
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python manage.py runserver --settings<span class="o">=</span>conf.settings.production 0.0.0.0:8000
 </pre></div>
 </div>
 <p>Or:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ... <span class="m">192</span>.168.56.101:8000 instead of <span class="m">0</span>.0.0.0:8000
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ... 192.168.56.101:8000 instead of 0.0.0.0:8000
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -84,7 +84,7 @@ the Django development server with 0.0.0.0:</p>
 </pre></div>
 </div>
 <p>From the GUEST machine we can access the Django server:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl <span class="m">127</span>.0.0.0:8000
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl 127.0.0.0:8000
 </pre></div>
 </div>
 </div>
@@ -99,12 +99,12 @@ the Django development server with 0.0.0.0:</p>
   <p class="topless"><a href="index.html"
                         title="previous chapter">Welcome to eb&#8217;s documentation!</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="remote-ftp_01.html"
+  <p class="topless"><a href="vsftpd.html"
                         title="next chapter">Using Atom remote-ftp package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/virtual_box_01.rst.txt"
+      <li><a href="_sources/virtual_box_01.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -129,7 +129,7 @@ the Django development server with 0.0.0.0:</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="remote-ftp_01.html" title="Using Atom remote-ftp package"
+          <a href="vsftpd.html" title="Using Atom remote-ftp package"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to eb’s documentation!"
@@ -139,7 +139,7 @@ the Django development server with 0.0.0.0:</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, xbn.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>

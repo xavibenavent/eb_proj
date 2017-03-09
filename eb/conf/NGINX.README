@@ -8,5 +8,5 @@ To create the soft link:
    $ sudo ln -s /home/xbn/projects/eb_proj/eb/conf/nginx_eb.conf
         /etc/nginx/sites-enabled
 
-In the current directory (same as nginx_eb.conf) we store
-the file uwsgi_params
+In the current directory (same as nginx_eb.conf) store
+the file uwsgi_params, copying it from /etc/nginx/ directory

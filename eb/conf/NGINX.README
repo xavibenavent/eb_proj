@@ -1,0 +1,12 @@
+# NGINX.README
+
+In the /etc/nginx/sites-enabled/ directory it must be a
+soft link to the config file nginx_eb.conf
+
+To create the soft link:
+
+   $ sudo ln -s /home/xbn/projects/eb_proj/eb/conf/nginx_eb.conf
+        /etc/nginx/sites-enabled
+
+In the current directory (same as nginx_eb.conf) we store
+the file uwsgi_params

@@ -11,9 +11,11 @@ Welcome to eb's documentation!
    :caption: Contents:
 
    virtual_box_01
+   history_01
    vsftpd
    linux_packages
    nginx_01
+   uwsgi_01
    git_01
    sphinx_01
 

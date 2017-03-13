@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>uWSGI server &#8212; eb 1.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="eb 1.1.0 documentation" href="index.html" />
+    <link rel="next" title="Using git" href="git_01.html" />
+    <link rel="prev" title="Using NGINX server" href="nginx_01.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="git_01.html" title="Using git"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nginx_01.html" title="Using NGINX server"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p># uwsgi_01.rst</p>
+<div class="section" id="uwsgi-server">
+<h1>uWSGI server<a class="headerlink" href="#uwsgi-server" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="uwsgi-installation">
+<h2>uWSGI installation<a class="headerlink" href="#uwsgi-installation" title="Permalink to this headline">¶</a></h2>
+<p>Install the <strong>python3.5-dev</strong> package:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install python3.5-dev
+</pre></div>
+</div>
+<p>Check that <strong>uwsgi</strong> is not installed as a global
+package (deactivate any virtual environment first):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip freeze
+</pre></div>
+</div>
+<p>uWSGI installation in the virtual environment (activate the virtual
+environment first):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo pip install uwsgi
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-web-client-uwsgi-python">
+<h2>Check <strong>web client &lt;-&gt; uWSGI &lt;-&gt; Python</strong><a class="headerlink" href="#check-web-client-uwsgi-python" title="Permalink to this headline">¶</a></h2>
+<p>Create the file <strong>test.py</strong> into the <strong>conf</strong> directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># test.py</span>
+
+<span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="n">start_response</span><span class="p">(</span><span class="s1">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span><span class="s1">&#39;text/html&#39;</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">b</span><span class="s2">&quot;Hello World&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Run uWSGIfrom the <strong>~/projects/eb_proj/eb/</strong> directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ uwsgi --http :8000 --wsgi-file conf/test.py
+</pre></div>
+</div>
+<p>Check with the browser to <strong>127.0.0.1:8000</strong></p>
+</div>
+<div class="section" id="check-web-client-django-project">
+<h2>Check <strong>web client &lt;-&gt; Django project</strong><a class="headerlink" href="#check-web-client-django-project" title="Permalink to this headline">¶</a></h2>
+<p>From the <strong>~/projects/eb_proj/eb/</strong> directory, run the django
+development server:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python manage.py runserver 8001
+</pre></div>
+</div>
+<p>Check with the browser to <strong>127.0.0.1:8001</strong>
+We can also check admin at <strong>127.0.0.1:8000/admin</strong></p>
+</div>
+<div class="section" id="check-web-client-uwsgi-django">
+<h2>Check <strong>web client &lt;-&gt; uWSGI &lt;-&gt; Django</strong><a class="headerlink" href="#check-web-client-uwsgi-django" title="Permalink to this headline">¶</a></h2>
+<p>Run uWSGIfrom the <strong>~/projects/eb_proj/eb/</strong> directory to
+run the Django project:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ uwsgi --http :8000 --module conf.wsgi
+</pre></div>
+</div>
+<p>Check with the browser to <strong>127.0.0.1:8000</strong></p>
+</div>
+<div class="section" id="check-web-client-web-server-nginx-uwsgi-django">
+<h2>Check <strong>web client &lt;-&gt; web server (NGINX) &lt;-&gt; uWSGI &lt;-&gt; Django</strong><a class="headerlink" href="#check-web-client-web-server-nginx-uwsgi-django" title="Permalink to this headline">¶</a></h2>
+<p>Check that NGINX server is running.</p>
+<p>Run the Django application connecting NGINX and uWSGI through
+a socket:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ uwsgi --socket conf/eb.sock --module conf.wsgi --chmod-socket<span class="o">=</span>666
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">uWSGI server</a><ul>
+<li><a class="reference internal" href="#uwsgi-installation">uWSGI installation</a></li>
+<li><a class="reference internal" href="#check-web-client-uwsgi-python">Check <strong>web client &lt;-&gt; uWSGI &lt;-&gt; Python</strong></a></li>
+<li><a class="reference internal" href="#check-web-client-django-project">Check <strong>web client &lt;-&gt; Django project</strong></a></li>
+<li><a class="reference internal" href="#check-web-client-uwsgi-django">Check <strong>web client &lt;-&gt; uWSGI &lt;-&gt; Django</strong></a></li>
+<li><a class="reference internal" href="#check-web-client-web-server-nginx-uwsgi-django">Check <strong>web client &lt;-&gt; web server (NGINX) &lt;-&gt; uWSGI &lt;-&gt; Django</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nginx_01.html"
+                        title="previous chapter">Using NGINX server</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="git_01.html"
+                        title="next chapter">Using git</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/uwsgi_01.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="git_01.html" title="Using git"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="nginx_01.html" title="Using NGINX server"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, xbn.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

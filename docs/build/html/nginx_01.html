@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="eb 1.1.0 documentation" href="index.html" />
-    <link rel="next" title="Using git" href="git_01.html" />
+    <link rel="next" title="uWSGI server" href="uwsgi_01.html" />
     <link rel="prev" title="Linux packages management" href="linux_packages.html" /> 
   </head>
   <body role="document">
@@ -37,7 +37,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="git_01.html" title="Using git"
+          <a href="uwsgi_01.html" title="uWSGI server"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="linux_packages.html" title="Linux packages management"
@@ -88,16 +88,16 @@
 <li>Absolut (hard-coded) path for static files</li>
 <li>Absolut (hard-coded) path for media files</li>
 </ol>
-<p>Contents of the configuration file <strong>nginx.data</strong>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">xbn</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">eb_proj</span><span class="o">/</span><span class="n">servers_conf</span><span class="o">/</span><span class="n">nginx</span><span class="o">.</span><span class="n">data</span>
+<p>Contents of the configuration file <strong>nginx_eb.conf</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">xbn</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">eb_proj</span><span class="o">/</span><span class="n">eb</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">nginx_eb</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
-<p>Contents of the <strong>nginx.data</strong> file:</p>
+<p>Contents of the <strong>nginx_eb.conf</strong> file:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># nginx.data</span>
 
 <span class="n">upstream</span> <span class="n">django</span> <span class="p">{</span>
     <span class="c1"># Socket to connect to uWSGI server</span>
-    <span class="n">server</span> <span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">home</span><span class="o">/</span><span class="n">xbn</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">eb_proj</span><span class="o">/</span><span class="n">eb</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+    <span class="n">server</span> <span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">home</span><span class="o">/</span><span class="n">xbn</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">eb_proj</span><span class="o">/</span><span class="n">eb</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">eb</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="n">server</span> <span class="p">{</span>
@@ -124,11 +124,11 @@
 </div>
 <p>But instead of storing the file in this directory,
 we create a soft link to the file in our production directory:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="n">nginx</span><span class="o">.</span><span class="n">data</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span><span class="o">/</span><span class="n">nginx_eb</span><span class="o">.</span><span class="n">conf</span>
 </pre></div>
 </div>
 <p>We create the soft link:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo ln -s /home/xbn/eb20/nexus/nexus_nginx.conf /etc/nginx/sites-enabled
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo ln -s /home/xbn/projects/eb_proj/eb/conf/nginx_eb.conf /etc/nginx/sites-enabled
 </pre></div>
 </div>
 </div>
@@ -165,8 +165,8 @@ $ sudo lsof -i
   <p class="topless"><a href="linux_packages.html"
                         title="previous chapter">Linux packages management</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="git_01.html"
-                        title="next chapter">Using git</a></p>
+  <p class="topless"><a href="uwsgi_01.html"
+                        title="next chapter">uWSGI server</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -195,7 +195,7 @@ $ sudo lsof -i
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="git_01.html" title="Using git"
+          <a href="uwsgi_01.html" title="uWSGI server"
              >next</a> |</li>
         <li class="right" >
           <a href="linux_packages.html" title="Linux packages management"

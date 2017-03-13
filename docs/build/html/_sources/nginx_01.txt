@@ -41,27 +41,27 @@ We need to create a configuration file with:
 3. Absolut (hard-coded) path for static files
 4. Absolut (hard-coded) path for media files
 
-Contents of the configuration file **nginx.data**:
+Contents of the configuration file **nginx_eb.conf**:
 ::
 
-   /home/xbn/projects/eb_proj/servers_conf/nginx.data
+   /home/xbn/projects/eb_proj/eb/conf/nginx_eb.conf
 
-Contents of the **nginx.data** file:
+Contents of the **nginx_eb.conf** file:
 
-.. literalinclude:: data/nginx_01.data
+.. literalinclude:: data/nginx_eb.conf
 
 
 But instead of storing the file in this directory,
 we create a soft link to the file in our production directory:
 ::
 
-   /etc/nginx/sites-enabled/nginx.data
+   /etc/nginx/sites-enabled/nginx_eb.conf
 
 We create the soft link:
 
 .. code-block:: bash
 
-   $ sudo ln -s /home/xbn/eb20/nexus/nexus_nginx.conf /etc/nginx/sites-enabled
+   $ sudo ln -s /home/xbn/projects/eb_proj/eb/conf/nginx_eb.conf /etc/nginx/sites-enabled
 
 
 

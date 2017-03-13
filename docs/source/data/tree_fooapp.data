@@ -1,0 +1,11 @@
+fooapp
+├── admin.py
+├── apps.py
+├── __init__.py
+├── migrations
+│   └── __init__.py
+├── models.py
+├── tests.py
+└── views.py
+
+1 directory, 7 files

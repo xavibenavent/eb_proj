@@ -1,0 +1,32 @@
+.
+├── conf
+│   ├── eb.sock
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── nginx_eb.conf
+│   ├── NGINX.README
+│   ├── __pycache__
+│   │   ├── __init__.cpython-35.pyc
+│   │   ├── settings.cpython-35.pyc
+│   │   ├── urls.cpython-35.pyc
+│   │   └── wsgi.cpython-35.pyc
+│   ├── settings
+│   │   ├── base.py
+│   │   ├── development.py
+│   │   └── __pycache__
+│   │       ├── base.cpython-35.pyc
+│   │       ├── development.cpython-35.pyc
+│   │       └── settings.cpython-35.pyc
+│   ├── test.py
+│   ├── urls.py
+│   ├── uwsgi_params
+│   ├── wsgi.py
+│   └── wsgi.pyc
+├── db.sqlite3
+├── eb.sock
+├── manage.py
+├── media
+├── static
+└── tree_01.data
+
+6 directories, 23 files

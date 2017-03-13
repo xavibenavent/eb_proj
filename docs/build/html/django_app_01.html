@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Working with a Django app &#8212; eb 1.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="eb 1.1.0 documentation" href="index.html" />
+    <link rel="prev" title="Using Sphinx" href="sphinx_01.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sphinx_01.html" title="Using Sphinx"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="working-with-a-django-app">
+<h1>Working with a Django app<a class="headerlink" href="#working-with-a-django-app" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creating-a-django-app">
+<h2>Creating a Django app<a class="headerlink" href="#creating-a-django-app" title="Permalink to this headline">¶</a></h2>
+<p>From <strong>(dj1.9) ~/projects/eb_proj/eb/</strong> create the <strong>fooapp</strong> app:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python manage.py startapp fooapp
+</pre></div>
+</div>
+<p>Check the created files:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>fooapp
+├── admin.py
+├── apps.py
+├── __init__.py
+├── migrations
+│   └── __init__.py
+├── models.py
+├── tests.py
+└── views.py
+
+1 directory, 7 files
+</pre></div>
+</div>
+<p>Add <strong>fooapp</strong> to INSTALLED_APPS in <strong>settings.py</strong>.</p>
+<p>Check the stack:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ uwsgi --socket conf/eb.sock --module conf.wsgi --chmod-socket<span class="o">=</span>666
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-view">
+<h2>Creating a view<a class="headerlink" href="#creating-a-view" title="Permalink to this headline">¶</a></h2>
+<p><strong>fooapp/views.py</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#from django.shortcuts import render</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="k">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;Hello from fooapp!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>conf/urls.py</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;eb URL Configuration</span>
+
+<span class="sd">The `urlpatterns` list routes URLs to views. For more information please see:</span>
+<span class="sd">    https://docs.djangoproject.com/en/1.9/topics/http/urls/</span>
+<span class="sd">Examples:</span>
+<span class="sd">Function views</span>
+<span class="sd">    1. Add an import:  from my_app import views</span>
+<span class="sd">    2. Add a URL to urlpatterns:  url(r&#39;^$&#39;, views.home, name=&#39;home&#39;)</span>
+<span class="sd">Class-based views</span>
+<span class="sd">    1. Add an import:  from other_app.views import Home</span>
+<span class="sd">    2. Add a URL to urlpatterns:  url(r&#39;^$&#39;, Home.as_view(), name=&#39;home&#39;)</span>
+<span class="sd">Including another URLconf</span>
+<span class="sd">    1. Add an import:  from blog import urls as blog_urls</span>
+<span class="sd">    2. Import the include() function: from django.conf.urls import url, include</span>
+<span class="sd">    3. Add a URL to urlpatterns:  url(r&#39;^blog/&#39;, include(blog_urls))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="k">import</span> <span class="n">url</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="k">import</span> <span class="n">admin</span>
+
+<span class="c1"># Added for fooapp</span>
+<span class="kn">from</span> <span class="nn">fooapp</span> <span class="k">import</span> <span class="n">views</span>
+<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="k">import</span> <span class="n">include</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^fooapp/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;fooapp.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>foapp/urls.py</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># fooapp/urls.py (newly created)</span>
+
+<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="k">import</span> <span class="n">url</span>
+<span class="kn">from</span> <span class="nn">fooapp</span> <span class="k">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="n">url</span><span class="p">(</span><span class="s1">&#39;^$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Check the stack:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ uwsgi --socket conf/eb.sock --module conf.wsgi --chmod-socket<span class="o">=</span>666
+</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>http://127.0.0.1:8008/fooapp/
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Working with a Django app</a><ul>
+<li><a class="reference internal" href="#creating-a-django-app">Creating a Django app</a></li>
+<li><a class="reference internal" href="#creating-a-view">Creating a view</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sphinx_01.html"
+                        title="previous chapter">Using Sphinx</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/django_app_01.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sphinx_01.html" title="Using Sphinx"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, xbn.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

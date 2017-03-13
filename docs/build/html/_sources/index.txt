@@ -18,6 +18,7 @@ Welcome to eb's documentation!
    uwsgi_01
    git_01
    sphinx_01
+   django_app_01
 
 Indices and tables
 ==================

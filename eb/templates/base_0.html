@@ -1,9 +1,39 @@
-<html>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <!-- Bootstrap Mobile friendly styles and must be metas -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 1/3 -->
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
     {% block extra_head %} {% endblock %}
   </head>
 
   <body>
+    <div class="bs-docs-header" style="background: dakgreen">
+      <div class="container-fluid" style="color: A8FFF8">
+        <h1>Briefing Electrónico 2.0</h1>
+        <p>División ATS Región Este</p>
+      </div>
+    </div>
     {% block content %}{% endblock %}
+
+    <br>
+
+    <!-- Buttons -->
+    <button type="button" class="btn btn-default">Success</button>
+    <button type="button" class="btn btn-primary">Success</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-info">Success</button>
+    <button type="button" class="btn btn-warning">Success</button>
+    <button type="button" class="btn btn-danger">Success</button>
+    <button type="button" class="btn btn-link">Success</button>
+
+    <!-- Bootstrap 2/3 -->
+    <script src="{% static 'jquery-3.2.0.min.js' %}"></script>
+    <!-- Bootstrap 3/3 -->
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
   </body>
 </html>

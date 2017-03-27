@@ -19,6 +19,7 @@ Welcome to eb's documentation!
    git_01
    sphinx_01
    django_app_01
+   templates
 
 Indices and tables
 ==================

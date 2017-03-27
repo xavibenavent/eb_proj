@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Working with templates &#8212; eb 1.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="eb 1.1.0 documentation" href="index.html" />
+    <link rel="prev" title="Working with a Django app" href="django_app_01.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="django_app_01.html" title="Working with a Django app"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="working-with-templates">
+<h1>Working with templates<a class="headerlink" href="#working-with-templates" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="concept">
+<h2>Concept<a class="headerlink" href="#concept" title="Permalink to this headline">¶</a></h2>
+<p>Templates are composed of <strong>static parts</strong> and <strong>template tags</strong> (dynamic content)</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Create the templates directory in <strong>~/projects/eb_proj/eb/</strong>.</p>
+<p>Inside the <strong>templates</strong> directory we have to create a new directory for each application.</p>
+<p>In base.py (settings.py) create the variable TEMPLATE_DIR with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">TEMPLATE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span><span class="s1">&#39;templates&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>BASE_DIR</strong> stores the path to <strong>eb</strong> directory and <strong>TEMPLATE_DIR</strong> the path to <strong>templates</strong></p>
+<p>In base.py (settings.py) also update the <strong>TEMPLATES</strong> variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="o">...</span>
+   <span class="s1">&#39;DIRS&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">TEMPLATE_DIR</span><span class="p">,</span> <span class="p">]</span>
+   <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-a-template">
+<h2>Adding a template<a class="headerlink" href="#adding-a-template" title="Permalink to this headline">¶</a></h2>
+<p>Inside eb/templates/fooapp/ create the <strong>template.html</strong> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+   <span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">fooapp</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
+   <span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
+     <span class="p">{{</span> <span class="n">message</span> <span class="p">}}</span>
+   <span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-new-view">
+<h2>Creating a new view<a class="headerlink" href="#creating-a-new-view" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>template context</strong> is a Python dictionary that maps template variable
+names with Python variables.</p>
+<p>Inside <strong>eb/fooapp/views.py</strong> create a new view (function):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="k">def</span> <span class="nf">template</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+   <span class="n">context_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s2">&quot;Hello from template&quot;</span><span class="p">}</span>
+   <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;fooapp/template.html&#39;</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="n">context_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-it-works">
+<h2>Check it works<a class="headerlink" href="#check-it-works" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ uwsgi --socket conf/eb.sock --module conf.wsgi --chmod-socket<span class="o">=</span>666
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="template-inheritance">
+<h1>Template inheritance<a class="headerlink" href="#template-inheritance" title="Permalink to this headline">¶</a></h1>
+<p>Inside <strong>/eb/templates/fooapp/</strong> create the base.html file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s2">&quot;base_0.html&quot;</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+  <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">CONTENT</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Inside <strong>/eb/templates/</strong> create the base_0.html file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">extra_head</span> <span class="o">%</span><span class="p">}</span> <span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+  <span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
+
+  <span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+  <span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Create a new view and the corresponding url.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Working with templates</a><ul>
+<li><a class="reference internal" href="#concept">Concept</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#adding-a-template">Adding a template</a></li>
+<li><a class="reference internal" href="#creating-a-new-view">Creating a new view</a></li>
+<li><a class="reference internal" href="#check-it-works">Check it works</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#template-inheritance">Template inheritance</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="django_app_01.html"
+                        title="previous chapter">Working with a Django app</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/templates.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="django_app_01.html" title="Working with a Django app"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">eb 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, xbn.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

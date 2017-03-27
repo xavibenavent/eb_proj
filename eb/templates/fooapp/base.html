@@ -1,0 +1,16 @@
+{% extends "base_0.html" %}
+
+<!-- Alternative for {% load staticfiles %} -->
+<!-- The staticfiles app is: django.contrib.staticfiles -->
+{% load static from staticfiles %}
+
+{% block content %}
+  <h1>CONTENT R2D2</h1>
+
+  <img src="{% static 'fooapp/r2d2.jpeg' %}" alt="my image" height="200"/>
+
+  <!-- Load without show -->
+  {% static "fooapp/r2d2.jpeg" as r2d2 %}
+  <img src="{{ r2d2 }}" alt="r2d2" height="200" />
+
+{% endblock %}

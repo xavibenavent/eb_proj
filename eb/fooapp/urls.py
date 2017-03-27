@@ -5,4 +5,5 @@ from fooapp import views
 
 urlpatterns = [
    url('^$', views.index, name='index'),
+   url('^template/', views.template, name='template'),
 ]
